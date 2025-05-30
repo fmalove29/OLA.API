@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Service/Auth/AuthService.cs">
+    <Files>
+      <File FileName="Service/Auth/AuthService.cs" Line="33" Column="63" />
+      <File FileName="Service/Auth/ITokenService.cs" />
+      <File FileName="Service/Auth/TokenService.cs" Line="21" Column="40" />
+      <File FileName="Service/Auth/IAuthService.cs" Line="8" Column="57" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="OLA.Business" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

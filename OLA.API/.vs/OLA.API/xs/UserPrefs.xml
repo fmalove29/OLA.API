@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{782FA795-FDC2-4E64-B647-0083CBEC39F3}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/Auth/AuthController.cs">
+    <Files>
+      <File FileName="Controllers/Auth/AuthController.cs" Line="8" Column="1" />
+      <File FileName="Program.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="OLA.API" expanded="True">
+            <Node name="OLA.API">
+              <Node name="Controllers" expanded="True">
+                <Node name="Auth" expanded="True">
+                  <Node name="AuthController.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.OLA.API PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

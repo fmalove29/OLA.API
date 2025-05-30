@@ -1,0 +1,6 @@
+@OLA.API_HostAddress = http://localhost:5083
+
+GET {{OLA.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

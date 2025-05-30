@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLA.Data", "OLA.Data.csproj", "{753FE09A-1D95-4E55-A061-CB0BA4C13892}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{753FE09A-1D95-4E55-A061-CB0BA4C13892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753FE09A-1D95-4E55-A061-CB0BA4C13892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753FE09A-1D95-4E55-A061-CB0BA4C13892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753FE09A-1D95-4E55-A061-CB0BA4C13892}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7843C6F-C10B-4460-B60B-6E7C6FB275CC}
+	EndGlobalSection
+EndGlobal
