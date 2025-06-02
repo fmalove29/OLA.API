@@ -32,3 +32,16 @@ public enum RelationshipType
     [Description("Others")]
     Others = 14
 }
+
+public enum LoanApplicationStatus
+{
+    Pending = 0,
+    Approved = 1,
+    Rejected = 2,
+}
+public enum LoanStatus
+{
+    Active = 0,
+    Paid = 1,
+    OverDue = 2
+}
