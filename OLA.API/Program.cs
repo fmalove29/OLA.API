@@ -7,6 +7,7 @@ using OLA.Data.DataContext;
 using OLA.Data.Models.User;
 using OLA.Data.Repository;
 using OLA.Business.Service.Auth;
+using OLA.Business.Service.Loan;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,8 @@ builder.Services.AddScoped<IRepository<Family>, Repository<Family>>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRepository<OLA.Data.Models.Loan.LoanApplication>, Repository<OLA.Data.Models.Loan.LoanApplication>>();
+builder.Services.AddScoped<LoanApplicationService>();
 builder.Services.AddHttpContextAccessor();
 
 

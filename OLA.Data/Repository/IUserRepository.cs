@@ -1,6 +1,8 @@
 using OLA.Data.Models.User;
 using OLA.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace OLA.Data.Repository;
 
 public interface IUserRepository
@@ -22,4 +24,5 @@ public interface IUserRepository
     public Task AddRoles(AppUser appUser,string role);
 
     public Task<bool> CheckRoleExist(string role);
+    public DbSet<AppUser> GetDbSet();
 }

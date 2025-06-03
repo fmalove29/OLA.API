@@ -7,10 +7,12 @@
   <ItemGroup>
     <None Remove="Service\" />
     <None Remove="Service\Auth\" />
+    <None Remove="Service\Loan\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
     <Folder Include="Service\Auth\" />
+    <Folder Include="Service\Loan\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

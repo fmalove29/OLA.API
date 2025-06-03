@@ -22,4 +22,12 @@
     <ProjectReference Include="..\OLA.Data\OLA.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controllers\Loan\" />
+    <None Remove="Models\request\Loan\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Loan\" />
+    <Folder Include="Models\request\Loan\" />
+  </ItemGroup>
 </Project>

@@ -45,3 +45,10 @@ public enum LoanStatus
     Paid = 1,
     OverDue = 2
 }
+
+public enum PaymentMethod
+{
+    Cash = 0,
+    Gcash = 1,
+    Bank = 2
+}

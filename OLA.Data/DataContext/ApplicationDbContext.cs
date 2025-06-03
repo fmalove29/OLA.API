@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OLA.Data.Models;
+using OLA.Data.Models.Loan;
 using OLA.Data.Models.User;
 
 namespace OLA.Data.DataContext
@@ -37,6 +38,8 @@ namespace OLA.Data.DataContext
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Family> Families { get; set; }
+        public DbSet<Loan> Loans { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 
 

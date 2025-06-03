@@ -10,7 +10,7 @@ namespace OLA.Data.Models
 	{
 		[Key]
 		public Guid Id { get; set; }
-		public DateTime Modified { get; set; }
+		public DateTime Modified { get; set; } = DateTime.UtcNow.ToLocalTime();
 		public Guid ModifiedBy { get; set; }
 		[Required]
 		public bool Active { get; set; }

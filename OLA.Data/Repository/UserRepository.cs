@@ -3,7 +3,8 @@ using OLA.Data.Models.User;
 using OLA.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-
+using Microsoft.EntityFrameworkCore;
+using OLA.Data.DataContext;
 
 namespace OLA.Data.Repository;
 
@@ -11,10 +12,12 @@ public class UserRepository : IUserRepository
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    public UserRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    private readonly ApplicationDbContext _context;
+    public UserRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
     {
         _userManager = userManager;
         _roleManager = roleManager;
+        _context = context;
     }
     public async Task<CreateUserResult> CreateAsync(AppUser user, string password)
     {
@@ -75,7 +78,7 @@ public class UserRepository : IUserRepository
     public async Task<string> GetUserIdByEmail(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
-        return user?.Id;
+        return user.Id;
     }
 
     public async Task AddRoles(AppUser appUser, string inputRole)
@@ -89,4 +92,9 @@ public class UserRepository : IUserRepository
 
         return roleExists;
     }
+    public DbSet<AppUser> GetDbSet()
+    {
+        return _context.Users;
+    }
+    
 }
