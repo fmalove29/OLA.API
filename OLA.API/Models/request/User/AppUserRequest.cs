@@ -2,8 +2,7 @@ namespace OLA.API.Models.request.User;
 
 public class AppUserRequest
 {
-    public string Id { get; set; }
-    public bool Active { get; set; }
+   
     public string FirstName {get; set;}
     public string LastName {get; set;}
     public string? MiddleName {get; set;}

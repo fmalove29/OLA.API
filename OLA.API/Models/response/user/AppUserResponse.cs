@@ -1,0 +1,20 @@
+﻿using System;
+namespace OLA.API.Models.response.user
+{
+	public class AppUserResponse
+	{
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string? MiddleName { get; set; }
+
+        public string? UserName { get; set; }
+
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public virtual ICollection<AddressResponse> Addresses { get; set; } = new List<AddressResponse>();
+
+        public virtual ICollection<FamilyResponse> Families { get; set; } = new List<FamilyResponse>();
+    }
+}
+

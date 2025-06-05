@@ -47,14 +47,10 @@ public class UserRepository : IUserRepository
         return appUser;
     }
 
-    public async Task<bool> SaveChangesAsync()
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task UpdateAsync(AppUser user)
     {
-        throw new NotImplementedException();
+        await _userManager.UpdateAsync(user);
     }
     public async Task<IEnumerable<string>> GetRolesAsync(AppUser appUser)
     {
@@ -66,7 +62,6 @@ public class UserRepository : IUserRepository
 
         if (user == null || !await _userManager.CheckPasswordAsync(user, password))
             return null; // Or throw new UnauthorizedAccessException();
-
         return user;
     }
 
@@ -95,6 +90,12 @@ public class UserRepository : IUserRepository
     public DbSet<AppUser> GetDbSet()
     {
         return _context.Users;
+    }
+
+    public async Task<bool> IsAdmin(AppUser appUser)
+    {
+        var hasRole = await _userManager.GetRolesAsync(appUser);
+        return hasRole.Contains("Admin");
     }
     
 }

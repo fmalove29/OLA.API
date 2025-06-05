@@ -25,9 +25,17 @@
   <ItemGroup>
     <None Remove="Controllers\Loan\" />
     <None Remove="Models\request\Loan\" />
+    <None Remove="Models\Filter\" />
+    <None Remove="Models\response\" />
+    <None Remove="Models\response\loan\" />
+    <None Remove="Models\response\user\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Loan\" />
     <Folder Include="Models\request\Loan\" />
+    <Folder Include="Models\Filter\" />
+    <Folder Include="Models\response\" />
+    <Folder Include="Models\response\loan\" />
+    <Folder Include="Models\response\user\" />
   </ItemGroup>
 </Project>

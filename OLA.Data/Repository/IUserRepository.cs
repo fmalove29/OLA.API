@@ -20,9 +20,9 @@ public interface IUserRepository
     public Task<string> GetUserIdByEmail(string Email);
 
     public Task DeleteAsync(AppUser user);
-    public Task<bool> SaveChangesAsync();
     public Task AddRoles(AppUser appUser,string role);
 
     public Task<bool> CheckRoleExist(string role);
+    public Task<bool> IsAdmin(AppUser appUser);
     public DbSet<AppUser> GetDbSet();
 }

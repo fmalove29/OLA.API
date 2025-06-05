@@ -2,6 +2,7 @@
 using OLA.Data.Repository;
 using OLA.Data.Models.User;
 using OLA.Business.Models.response;
+using Microsoft.EntityFrameworkCore;
 
 namespace OLA.Business.Service.Auth
 {
@@ -62,7 +63,20 @@ namespace OLA.Business.Service.Auth
 		public async Task<bool> CheckRoleExist(string role)
 		{
 			return await _userRepository.CheckRoleExist(role);
-		} 
-	}
+		}
+		public async Task<bool> IsAdmin(AppUser appUser)
+		{
+			return await _userRepository.IsAdmin(appUser);
+		}
+        public  DbSet<AppUser> GetDbSet()
+        {
+            return _userRepository.GetDbSet();
+        }
+		public async Task Update(AppUser user)
+		{
+			await _userRepository.UpdateAsync(user);
+		}
+
+    }
 }
 
