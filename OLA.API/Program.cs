@@ -42,7 +42,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRepository<OLA.Data.Models.Loan.LoanApplication>, Repository<OLA.Data.Models.Loan.LoanApplication>>();
 builder.Services.AddScoped<LoanApplicationService>();
-builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddHttpContextAccessor();
 
 

@@ -312,6 +312,7 @@ namespace OLA.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Barangay")
@@ -560,7 +561,9 @@ namespace OLA.Data.Migrations
                 {
                     b.HasOne("OLA.Data.Models.User.AppUser", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OLA.Data.Models.User.Family", b =>

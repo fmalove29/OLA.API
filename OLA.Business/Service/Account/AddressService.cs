@@ -5,7 +5,7 @@ using OLA.Data.Repository;
 
 namespace OLA.Business.Service.Account
 {
-	public class AddressService
+	public class AddressService : IAddressService
 	{
 		private readonly IRepository<Address> _repository;
 		public AddressService(IRepository<Address> repository)

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Client;
@@ -17,11 +17,11 @@ namespace MyApp.Namespace
     public class AccountController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly AddressService _addressService;
-        public AccountController(IAuthService authService)
+        private readonly IAddressService _addressService;
+        public AccountController(IAuthService authService, IAddressService addressService)
         {
             _authService = authService;
-            _addressService = _addressService;
+            _addressService = addressService;
         }
 
         [Authorize]
@@ -30,6 +30,8 @@ namespace MyApp.Namespace
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
             var objectId = await _authService.GetUserIdByEmail(email);
+
+
 
             try
             {
@@ -42,44 +44,42 @@ namespace MyApp.Namespace
                     return NotFound("User not found or Not Authenticated");
 
 
-                findUser.Email = appUserRequest.Email;
                 findUser.PhoneNumber = appUserRequest.PhoneNumber;
 
-                
+
                 await _authService.Update(findUser);
 
-                foreach (var userAddress in findUser.Addresses)
-                {
-                    var existAddress = (await _addressService.GetDbSet())
-                                       .FirstOrDefaultAsync(a => a.AppUserId == objectId)
-                                       .Select(a => new AddressResponse
-                                       {
-                                           Barangay = a.Barangay,
-                                           City = a.City,
-                                           Purok = a.Purok
-                                       });
-                    return Ok(existAddress);
-                   
-                    //if (existAddress == null)
-                    //{
-                    //    var newAddress = new OLA.Data.Models.User.Address
-                    //    {
-                    //        Barangay = userAddress.Barangay,
-                    //        Purok = userAddress.Purok,
-                    //        City = userAddress.City
-                    //    };
 
-                    //    await _addressService.Add(newAddress);
-                    //    await _addressService.SaveChangesAsync(Guid.Parse(objectId));
-                    //}
-                    //else
-                    //{
-                    //    existAddress.Barangay = userAddress.Barangay;
-                    //    existAddress.City = userAddress.City;
-                    //    existAddress.Purok = userAddress.Purok;
-                    //}
-              
+
+                foreach (var d in appUserRequest.Addresses)
+                {
+                    var existAddress = await (await _addressService.GetDbSet())
+                                        .FirstOrDefaultAsync(a => a.AppUserId == objectId && a.Id == d.Id);
+
+                    if (existAddress == null)
+                    {
+                        var newAddress = new OLA.Data.Models.User.Address
+                        {
+                            Barangay = d.Barangay,
+                            Purok = d.Purok,
+                            City = d.City
+                        };
+
+                        await _addressService.Add(newAddress);
+                        await _addressService.SaveChangesAsync(Guid.Parse(objectId));
+                    }
+                    else
+                    {
+                        existAddress.Barangay = d.Barangay;
+                        existAddress.City = d.City;
+                        existAddress.Purok = d.Purok;
+
+                        await _addressService.Update(existAddress);
+                        await _addressService.SaveChangesAsync(Guid.Parse(objectId));
+                        
+                    }
                 }
+
             }
             catch (Exception ex)
             {
