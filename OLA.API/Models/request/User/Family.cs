@@ -7,6 +7,7 @@ public class Family : BaseRequest
     public RelationshipType RelationType { get; set; }
     public DateTime DateOfBrith { get; set; }
     public bool IsEmergencyContact { get; set; }
+    public string AppUserId { get; set; }
     public Guid? AddressId { get; set; }
-    public virtual Address Address { get; set; }
+    public virtual Address? Address { get; set; }
 }

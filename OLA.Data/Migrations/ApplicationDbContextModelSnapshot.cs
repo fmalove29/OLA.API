@@ -155,6 +155,154 @@ namespace OLA.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("OLA.Data.Models.Administrator.Access", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Module")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Roles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accesses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("393d717c-eeae-485f-9eee-d3b259761ed6"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5500),
+                            ModifiedBy = new Guid("e3cd97bb-2cdb-4be9-869b-1d70e48fa27d"),
+                            Module = "Security",
+                            Name = "User",
+                            Path = "User",
+                            Roles = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("8db61816-a397-490c-b714-cbbf16432b01"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5550),
+                            ModifiedBy = new Guid("f635761b-3f92-4cf8-b7e5-8962b77646c4"),
+                            Module = "Security",
+                            Name = "Role",
+                            Path = "Role",
+                            Roles = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("5889ed06-3f22-4198-bb0d-c80e3fbbc394"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5560),
+                            ModifiedBy = new Guid("00fd30eb-8291-4f2c-ae8a-4d07694b24f3"),
+                            Module = "Security",
+                            Name = "Access",
+                            Path = "Access",
+                            Roles = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("51f313ef-2090-47fb-9d5b-486f5ba7ad5c"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5570),
+                            ModifiedBy = new Guid("156c06e4-fe3e-4d91-a278-b79061d00e97"),
+                            Module = "Security",
+                            Name = "Permission",
+                            Path = "Permission",
+                            Roles = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("78e8c0d6-1ba4-4c88-985a-decceb56c7ff"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5590),
+                            ModifiedBy = new Guid("374c5124-d398-4533-9a55-589cacb7d86f"),
+                            Module = "Customer",
+                            Name = "Customer Enrollment",
+                            Path = "Enrollment",
+                            Roles = "Admin,User"
+                        },
+                        new
+                        {
+                            Id = new Guid("1f982648-2cf0-4ef7-9c96-7f17fd884ecc"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5600),
+                            ModifiedBy = new Guid("516eff2a-1cfa-4e67-a1a0-4d21b2a2545f"),
+                            Module = "Loan",
+                            Name = "Loan Application",
+                            Path = "LoanApplication",
+                            Roles = "Admin,User"
+                        },
+                        new
+                        {
+                            Id = new Guid("ea60edc9-b785-41f4-9182-e75342ea57d6"),
+                            Active = true,
+                            Modified = new DateTime(2025, 6, 13, 11, 25, 52, 832, DateTimeKind.Local).AddTicks(5610),
+                            ModifiedBy = new Guid("48a0281a-7a31-4779-8e0f-c5072dbedb58"),
+                            Module = "Loan",
+                            Name = "Loan",
+                            Path = "Loan",
+                            Roles = "Admin,User"
+                        });
+                });
+
+            modelBuilder.Entity("OLA.Data.Models.Administrator.Permission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Access")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Permissions");
+                });
+
             modelBuilder.Entity("OLA.Data.Models.Loan.Loan", b =>
                 {
                     b.Property<Guid>("Id")
@@ -429,6 +577,7 @@ namespace OLA.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ContactNumber")
@@ -514,6 +663,15 @@ namespace OLA.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OLA.Data.Models.Administrator.Permission", b =>
+                {
+                    b.HasOne("OLA.Data.Models.User.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("OLA.Data.Models.Loan.Loan", b =>
                 {
                     b.HasOne("OLA.Data.Models.User.AppUser", "User")
@@ -574,7 +732,9 @@ namespace OLA.Data.Migrations
 
                     b.HasOne("OLA.Data.Models.User.AppUser", null)
                         .WithMany("Families")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });

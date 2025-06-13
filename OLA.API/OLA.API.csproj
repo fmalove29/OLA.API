@@ -29,6 +29,11 @@
     <None Remove="Models\response\" />
     <None Remove="Models\response\loan\" />
     <None Remove="Models\response\user\" />
+    <None Remove="Extension\" />
+    <None Remove="Extension\Account\" />
+    <None Remove="Controllers\Administrator\" />
+    <None Remove="Extension\Administrator\" />
+    <None Remove="Models\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Loan\" />
@@ -37,5 +42,13 @@
     <Folder Include="Models\response\" />
     <Folder Include="Models\response\loan\" />
     <Folder Include="Models\response\user\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Extension\Account\" />
+    <Folder Include="Controllers\Administrator\" />
+    <Folder Include="Extension\Administrator\" />
+    <Folder Include="Models\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
 </Project>

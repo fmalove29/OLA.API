@@ -11,11 +11,13 @@
     <None Remove="DataContext\" />
     <None Remove="Models\" />
     <None Remove="Models\User\" />
+    <None Remove="Models\Administrator\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
     <Folder Include="DataContext\" />
     <Folder Include="Models\User\" />
+    <Folder Include="Models\Administrator\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8" />

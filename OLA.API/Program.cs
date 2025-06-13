@@ -10,6 +10,8 @@ using OLA.Business.Service.Auth;
 using OLA.Business.Service.Loan;
 using Microsoft.OpenApi.Models;
 using OLA.Business.Service.Account;
+using OLA.Business.Service.Administrator;
+using OLA.Data.Models.Administrator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +39,16 @@ builder.Services.AddCors(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<IRepository<Address> , Repository<Address>>();
 builder.Services.AddScoped<IRepository<Family>, Repository<Family>>();
+builder.Services.AddScoped<IRepository<Access>, Repository<Access>>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRepository<OLA.Data.Models.Loan.LoanApplication>, Repository<OLA.Data.Models.Loan.LoanApplication>>();
 builder.Services.AddScoped<LoanApplicationService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IFamilyService, FamilyService>();
+builder.Services.AddScoped<IAccessService, AccessService>();
 builder.Services.AddHttpContextAccessor();
 
 

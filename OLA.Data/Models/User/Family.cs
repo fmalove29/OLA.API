@@ -9,6 +9,7 @@ namespace OLA.Data.Models.User
 		public string ContactNumber {get; set;}
 		public RelationshipType RelationType { get; set; }
         public string RelationshipTypeName => RelationType.ToString();
+        public string AppUserId { get; set; }
         public DateTime DateOfBrith { get; set; }
         public bool IsEmergencyContact { get; set; }
         public Guid? AddressId { get; set; }
