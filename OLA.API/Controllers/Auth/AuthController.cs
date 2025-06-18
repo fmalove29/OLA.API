@@ -59,21 +59,16 @@ namespace MyApp.Namespace
         [HttpPost("login")]
         public async Task<IActionResult> login([FromBody]LoginDTO logUser)
         {
-            var user = new AppUser
-            {
-                Email = logUser.Email
-            };
-
-            var result = await _authService.Login(user, logUser.Password);
+            var result = await _authService.Login(new AppUser { Email = logUser.Email }, logUser.Password);
 
             if (result == null)
                 return Unauthorized(new { message = "Invalid credentials" });
 
-            var token = await _tokenService.CreateToken(user);
 
-            return Ok(new {
-                userToken = token
-            });
+            var token = await _tokenService.CreateToken(result);
+
+            return Ok(new { userToken = token });
+
         }
 
     }

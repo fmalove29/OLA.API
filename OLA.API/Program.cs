@@ -12,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using OLA.Business.Service.Account;
 using OLA.Business.Service.Administrator;
 using OLA.Data.Models.Administrator;
+using System.Security.Claims;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IRepository<Address> , Repository<Address>>();
 builder.Services.AddScoped<IRepository<Family>, Repository<Family>>();
 builder.Services.AddScoped<IRepository<Access>, Repository<Access>>();
+builder.Services.AddScoped<IRepository<Permission>, Repository<Permission>>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -49,6 +52,7 @@ builder.Services.AddScoped<LoanApplicationService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IFamilyService, FamilyService>();
 builder.Services.AddScoped<IAccessService, AccessService>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddHttpContextAccessor();
 
 
@@ -75,6 +79,8 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+
+        RoleClaimType = ClaimTypes.Role
     };
 });
 

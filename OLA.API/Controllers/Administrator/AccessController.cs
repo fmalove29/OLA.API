@@ -4,7 +4,10 @@ using OLA.Business.Service.Administrator;
 using Microsoft.AspNetCore.Authorization;
 using OLA.API.Models.Filter;
 using OLA.API.Extension.Administrator;
-
+using OLA.API.Models.request.Administrator;
+using OLA.Business.Service.Auth;
+using System.Security.Claims;
+using Microsoft.Identity.Client;
 
 namespace MyApp.Namespace
 {
@@ -13,14 +16,17 @@ namespace MyApp.Namespace
     public class AccessController : ControllerBase
     {
         private readonly IAccessService _accessService;
+        private readonly IAuthService _authService;
 
-        public AccessController(IAccessService accessService)
+        public AccessController(IAccessService accessService, IAuthService authService)
         {
             _accessService = accessService;
+            _authService = authService;
+
         }
 
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] AccessFilter filter)
         {
@@ -39,8 +45,31 @@ namespace MyApp.Namespace
             return Ok(filtered); // Or Ok(filtered) if not using custom HrisOk()
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] AccessRequest accessRequest)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var objectId = await _authService.GetUserIdByEmail(email);
+            try
+            {
+                var newAccess = new OLA.Data.Models.Administrator.Access
+                {
+                    Name = accessRequest.Name,
+                    Path = accessRequest.Path,
+                    Module = accessRequest.Module,
+                    Roles = string.Join(",", accessRequest.Roles)
+                };
+                await _accessService.Add(newAccess);
+                await _accessService.SaveChangesAsync(Guid.Parse(objectId));
 
-
+                return Ok(newAccess);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

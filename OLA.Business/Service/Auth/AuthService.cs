@@ -3,6 +3,7 @@ using OLA.Data.Repository;
 using OLA.Data.Models.User;
 using OLA.Business.Models.response;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace OLA.Business.Service.Auth
 {
@@ -77,6 +78,15 @@ namespace OLA.Business.Service.Auth
 			await _userRepository.UpdateAsync(user);
 		}
 
+		public async Task<IdentityResult> RemoveRole(AppUser appUser, string role)
+		{
+			return await _userRepository.RemoveRole(appUser, role);
+		}
+
+		public async Task<bool> IsInRole(AppUser appUser, string role)
+		{
+			return await _userRepository.IsInRole(appUser, role);
+		}
     }
 }
 

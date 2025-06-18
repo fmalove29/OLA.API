@@ -23,7 +23,9 @@ public class TokenService : ITokenService
 
     public async Task<string> CreateToken(AppUser appUser)
     {
-        var userRoles = await _userRepository.GetRolesAsync(appUser);
+        var user = await _userRepository.GetByIdAsync(appUser.Id);
+
+        var userRoles = await _userRepository.GetRolesAsync(user);
 
         var claims = new List<Claim>
         {
@@ -31,10 +33,12 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, appUser.Id),
             new Claim(ClaimTypes.Name, appUser.UserName ?? ""),
-            new Claim(ClaimTypes.Email, appUser.Email ?? "")
+            new Claim(ClaimTypes.Email, appUser.Email ?? ""),
+
         };
 
         claims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
+
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

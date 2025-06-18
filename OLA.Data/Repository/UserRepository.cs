@@ -97,5 +97,15 @@ public class UserRepository : IUserRepository
         var hasRole = await _userManager.GetRolesAsync(appUser);
         return hasRole.Contains("Admin");
     }
-    
+
+    public async Task<IdentityResult> RemoveRole(AppUser appUser, string role)
+    {
+        var result = await _userManager.RemoveFromRoleAsync(appUser, role);
+
+        return result;
+    }
+    public async Task<bool> IsInRole(AppUser appUser, string role)
+    {
+        return await _userManager.IsInRoleAsync(appUser, role);
+    }
 }

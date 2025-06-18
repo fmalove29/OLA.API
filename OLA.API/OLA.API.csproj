@@ -34,6 +34,9 @@
     <None Remove="Controllers\Administrator\" />
     <None Remove="Extension\Administrator\" />
     <None Remove="Models\Common\" />
+    <None Remove="Models\request\Administrator\" />
+    <None Remove="Models\response\Administrator\" />
+    <None Remove="Models\Security\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Loan\" />
@@ -47,8 +50,12 @@
     <Folder Include="Controllers\Administrator\" />
     <Folder Include="Extension\Administrator\" />
     <Folder Include="Models\Common\" />
+    <Folder Include="Models\request\Administrator\" />
+    <Folder Include="Models\response\Administrator\" />
+    <Folder Include="Models\Security\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
 </Project>
