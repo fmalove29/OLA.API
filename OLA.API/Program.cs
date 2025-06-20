@@ -49,6 +49,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRepository<OLA.Data.Models.Loan.LoanApplication>, Repository<OLA.Data.Models.Loan.LoanApplication>>();
 builder.Services.AddScoped<LoanApplicationService>();
+builder.Services.AddScoped<IRepository<OLA.Data.Models.Loan.Loan>, Repository<OLA.Data.Models.Loan.Loan>>();
+builder.Services.AddScoped<LoanService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IFamilyService, FamilyService>();
 builder.Services.AddScoped<IAccessService, AccessService>();

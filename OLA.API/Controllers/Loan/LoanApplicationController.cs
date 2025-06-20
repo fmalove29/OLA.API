@@ -11,7 +11,8 @@ using OLA.API.Models.response.user;
 using OLA.API.Models.response.loan;
 using OLA.API.Models;
 using Microsoft.EntityFrameworkCore;
-
+using OLA.API.Extension.Loan;
+using OLA.Data.Repository;
 
 namespace MyApp.Namespace
 {
@@ -21,10 +22,17 @@ namespace MyApp.Namespace
     {
         private readonly LoanApplicationService _loanApplicationService;
         private readonly IAuthService _authService;
-        public LoanApplicationController(LoanApplicationService loanApplicationService, IAuthService authService)
+        private readonly LoanService _loanService;
+        public LoanApplicationController
+            (
+            LoanApplicationService loanApplicationService,
+            IAuthService authService,
+            LoanService loanService
+            )
         {
             _loanApplicationService = loanApplicationService;
             _authService = authService;
+            _loanService = loanService;
         }
 
         [HttpGet]
@@ -180,6 +188,94 @@ namespace MyApp.Namespace
             }
         }
 
-        
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> Update([FromQuery] Guid loanAppId)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var objectId = await _authService.GetUserIdByEmail(email);
+
+            var loanApp = (await _loanApplicationService.GetDbSet())
+                           .FirstOrDefault(e => e.Id == loanAppId && e.AppUserId == objectId);
+
+            if (loanApp == null)
+            {
+                return Unauthorized();
+
+            }
+
+            await _loanApplicationService.DeleteAsync(loanApp);
+            await _loanApplicationService.SaveChangesAsync(Guid.Parse(objectId));
+
+            return Ok(loanApp);
+        }
+
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] LoanApplicationRequest loanApplicationRequest)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var objectId = await _authService.GetUserIdByEmail(email);
+
+
+            var loanApp = (await _loanApplicationService.GetDbSet())
+                                .FirstOrDefault(e => e.Id == loanApplicationRequest.Id && e.AppUserId == objectId);
+
+            if (loanApp is null)
+            {
+                return Unauthorized();
+            }
+
+            loanApp.AmountRequested = loanApplicationRequest.AmountRequested;
+            loanApp.Purpose = loanApplicationRequest.Purpose;
+            loanApp.Notes = loanApplicationRequest.Notes;
+
+            await _loanApplicationService.UpdateAsync(loanApp);
+            await _loanApplicationService.SaveChangesAsync(Guid.Parse(objectId));
+
+            return Ok(loanApp.ToLoanApplicationResponse());
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("approval")]
+        public async Task<IActionResult> Approval([FromBody] LoanApprovalRequest loanApprovalRequest)
+        {
+
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var objectId = await _authService.GetUserIdByEmail(email);
+
+            var loanApp = (await _loanApplicationService.GetDbSet())
+                                .FirstOrDefault(e => e.Id == loanApprovalRequest.Id);
+
+            if (loanApp is null)
+            {
+                return Unauthorized();
+            }
+
+            loanApp.ApprovalDate = DateTime.UtcNow.ToLocalTime();
+            loanApp.ApprovedBy = Guid.Parse(objectId);
+            loanApp.DisbursementDate = loanApprovalRequest.DisbursementDate;
+
+            await _loanApplicationService.UpdateAsync(loanApp);
+            await _loanApplicationService.SaveChangesAsync(Guid.Parse(objectId));
+
+            var newLoan = new OLA.Data.Models.Loan.Loan
+            {
+                LoanNumber = await _loanService.GenerateLoanNumber(),
+                DisbursementDate = loanApprovalRequest.DisbursementDate.Value,
+                DueDate = await _loanService.GetDueDate(loanApp.ApprovalDate.Value, loanApp.TermsInDays),
+                TermsInDays = loanApp.TermsInDays,
+                AppUserId = loanApp.AppUserId,
+                InterestRate = loanApp.InterestRate,
+                PrincipalAmount = loanApp.AmountRequested,
+                LoanStatus = OLA.Data.Models.Enum.LoanStatus.Active
+            };
+
+            await _loanService.Add(newLoan);
+            await _loanService.SaveChangesAsync(Guid.Parse(objectId));
+
+            return Ok(new { message = "Approve Successfully", data = newLoan });
+        }
     }
 }

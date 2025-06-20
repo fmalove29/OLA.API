@@ -1,7 +1,7 @@
 ﻿using System;
 namespace OLA.API.Models.request.Loan
 {
-	public class LoanApplicationRequest
+	public class LoanApplicationRequest : BaseRequest
 	{
         public Guid AppUserId { get; set; }
         public decimal AmountRequested { get; set; }

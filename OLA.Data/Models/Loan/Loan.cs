@@ -14,6 +14,8 @@ namespace OLA.Data.Models.Loan
     {   
         [Required]
         public string LoanNumber { get; set; }
+
+        public string AppUserId { get; set; }
         public virtual AppUser User { get; set; }
 
         [Required]

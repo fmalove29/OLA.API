@@ -2,7 +2,7 @@
 using OLA.API.Models.response.user;
 namespace OLA.API.Models.response.loan
 {
-    public class LoanApplicationResponse
+    public class LoanApplicationResponse : BaseResponse
     {
         public virtual AppUserResponse AppUser {get; set;}
         public decimal AmountRequested { get; set; }

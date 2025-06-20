@@ -37,6 +37,7 @@
     <None Remove="Models\request\Administrator\" />
     <None Remove="Models\response\Administrator\" />
     <None Remove="Models\Security\" />
+    <None Remove="Extension\Loan\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Loan\" />
@@ -53,6 +54,7 @@
     <Folder Include="Models\request\Administrator\" />
     <Folder Include="Models\response\Administrator\" />
     <Folder Include="Models\Security\" />
+    <Folder Include="Extension\Loan\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
